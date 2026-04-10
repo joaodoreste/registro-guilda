@@ -17,4 +17,13 @@ public interface MissaoRepository extends JpaRepository<Missao, Long> {
 
     Page<Missao> findByStatusIgnoreCaseAndNivelPerigoIgnoreCase(String status, String nivelPerigo, Pageable pageable
     );
+
+    Page<Missao> findByStatusIgnoreCaseAndDataInicioBetween(String status, OffsetDateTime inicio, OffsetDateTime fim, Pageable pageable
+    );
+
+    Page<Missao> findByNivelPerigoIgnoreCaseAndDataInicioBetween(String nivelPerigo, OffsetDateTime inicio, OffsetDateTime fim, Pageable pageable
+    );
+
+    Page<Missao> findByStatusIgnoreCaseAndNivelPerigoIgnoreCaseAndDataInicioBetween(String status, String nivelPerigo, OffsetDateTime inicio, OffsetDateTime fim, Pageable pageable
+    );
 }

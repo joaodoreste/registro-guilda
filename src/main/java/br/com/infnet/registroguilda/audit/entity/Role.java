@@ -35,11 +35,10 @@ public class Role {
     private Set<Usuario> usuarios = new HashSet<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "role_permissions",
-            schema = "audit",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id")
+    @JoinTable(name = "role_permissions", schema = "audit", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private Set<Permission> permissions = new HashSet<>();
+
+    @OneToMany(mappedBy = "role")
+    private Set<UsuarioRole> usuarioRoles = new HashSet<>();
 }

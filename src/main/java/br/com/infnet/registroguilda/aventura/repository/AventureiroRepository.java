@@ -15,7 +15,15 @@ public interface AventureiroRepository extends JpaRepository<Aventureiro, Long> 
 
     Page<Aventureiro> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
 
-    Page<Aventureiro> findByAtivoAndClasseIgnoreCaseAndNivelGreaterThanEqual(
-            Boolean ativo, String classe, Integer nivel, Pageable pageable
+    Page<Aventureiro> findByAtivoAndClasseIgnoreCaseAndNivelGreaterThanEqual(Boolean ativo, String classe, Integer nivel, Pageable pageable
+    );
+
+    Page<Aventureiro> findByAtivoAndClasseIgnoreCase(Boolean ativo, String classe, Pageable pageable
+    );
+
+    Page<Aventureiro> findByAtivoAndNivelGreaterThanEqual(Boolean ativo, Integer nivel, Pageable pageable
+    );
+
+    Page<Aventureiro> findByClasseIgnoreCaseAndNivelGreaterThanEqual(String classe, Integer nivel, Pageable pageable
     );
 }

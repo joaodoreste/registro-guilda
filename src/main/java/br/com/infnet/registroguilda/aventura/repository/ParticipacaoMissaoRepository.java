@@ -16,6 +16,8 @@ public interface ParticipacaoMissaoRepository extends JpaRepository<Participacao
 
     List<ParticipacaoMissao> findByMissaoId(Long missaoId);
 
+    Optional<ParticipacaoMissao> findFirstByAventureiroIdOrderByDataRegistroDesc(Long aventureiroId);
+
     @Query("""
         select new br.com.infnet.registroguilda.aventura.dto.RankingParticipacaoDto(
             p.aventureiro.id,

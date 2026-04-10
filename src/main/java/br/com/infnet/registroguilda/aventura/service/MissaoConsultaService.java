@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,37 +24,41 @@ public class MissaoConsultaService {
     private final ParticipacaoMissaoRepository participacaoMissaoRepository;
 
     public Page<MissaoResumoDto> listar(String status, String nivelPerigo, OffsetDateTime inicio, OffsetDateTime fim, Pageable pageable) {
-        Page<Missao> pagina;
+        Page<Missao> missoes;
+        boolean filtrarPorPeriodo = inicio != null && fim != null;
 
-        if (status != null && nivelPerigo != null) {
-            pagina = missaoRepository.findByStatusIgnoreCaseAndNivelPerigoIgnoreCase(status, nivelPerigo, pageable);
+        if (status != null && nivelPerigo != null && filtrarPorPeriodo) {
+            missoes = missaoRepository.findByStatusIgnoreCaseAndNivelPerigoIgnoreCaseAndDataInicioBetween(
+                    status, nivelPerigo, inicio, fim, pageable
+            );
+        } else if (status != null && nivelPerigo != null) {
+            missoes = missaoRepository.findByStatusIgnoreCaseAndNivelPerigoIgnoreCase(status, nivelPerigo, pageable);
+        } else if (status != null && filtrarPorPeriodo) {
+            missoes = missaoRepository.findByStatusIgnoreCaseAndDataInicioBetween(status, inicio, fim, pageable);
+        } else if (nivelPerigo != null && filtrarPorPeriodo) {
+            missoes = missaoRepository.findByNivelPerigoIgnoreCaseAndDataInicioBetween(nivelPerigo, inicio, fim, pageable);
         } else if (status != null) {
-            pagina = missaoRepository.findByStatusIgnoreCase(status, pageable);
+            missoes = missaoRepository.findByStatusIgnoreCase(status, pageable);
         } else if (nivelPerigo != null) {
-            pagina = missaoRepository.findByNivelPerigoIgnoreCase(nivelPerigo, pageable);
-        } else if (inicio != null && fim != null) {
-            pagina = missaoRepository.findByDataInicioBetween(inicio, fim, pageable);
+            missoes = missaoRepository.findByNivelPerigoIgnoreCase(nivelPerigo, pageable);
+        } else if (filtrarPorPeriodo) {
+            missoes = missaoRepository.findByDataInicioBetween(inicio, fim, pageable);
         } else {
-            pagina = missaoRepository.findAll(pageable);
+            missoes = missaoRepository.findAll(pageable);
         }
 
-        return pagina.map(m -> new MissaoResumoDto(
-                m.getId(),
-                m.getTitulo(),
-                m.getStatus(),
-                m.getNivelPerigo(),
-                m.getDataInicio(),
-                m.getDataTermino()
-        ));
+        return missoes.map(this::montarResumo);
     }
 
     public MissaoDetalheDto detalhar(Long id) {
         Missao missao = missaoRepository.findById(id).orElseThrow();
 
-        List<ParticipanteMissaoDto> participantes = participacaoMissaoRepository.findByMissaoId(id)
-                .stream()
-                .map(this::mapearParticipante)
-                .toList();
+        List<ParticipacaoMissao> registros = participacaoMissaoRepository.findByMissaoId(id);
+        List<ParticipanteMissaoDto> participantes = new ArrayList<>();
+
+        for (ParticipacaoMissao registro : registros) {
+            participantes.add(montarParticipante(registro));
+        }
 
         return new MissaoDetalheDto(
                 missao.getId(),
@@ -67,7 +72,18 @@ public class MissaoConsultaService {
         );
     }
 
-    private ParticipanteMissaoDto mapearParticipante(ParticipacaoMissao participacao) {
+    private MissaoResumoDto montarResumo(Missao missao) {
+        return new MissaoResumoDto(
+                missao.getId(),
+                missao.getTitulo(),
+                missao.getStatus(),
+                missao.getNivelPerigo(),
+                missao.getDataInicio(),
+                missao.getDataTermino()
+        );
+    }
+
+    private ParticipanteMissaoDto montarParticipante(ParticipacaoMissao participacao) {
         return new ParticipanteMissaoDto(
                 participacao.getAventureiro().getId(),
                 participacao.getAventureiro().getNome(),

@@ -18,7 +18,6 @@ public class PainelTaticoMissaoService {
 
     @Cacheable("topMissoes15Dias")
     public List<PainelTaticoMissao> buscarTop15Dias() {
-        System.out.println("Consultando banco para top missões...");
 
         LocalDateTime dataLimite = LocalDateTime.now().minusDays(15);
 

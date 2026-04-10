@@ -3,9 +3,11 @@ package br.com.infnet.registroguilda;
 import br.com.infnet.registroguilda.audit.entity.Organizacao;
 import br.com.infnet.registroguilda.audit.entity.Role;
 import br.com.infnet.registroguilda.audit.entity.Usuario;
+import br.com.infnet.registroguilda.audit.entity.UsuarioRole;
 import br.com.infnet.registroguilda.audit.repository.OrganizacaoRepository;
 import br.com.infnet.registroguilda.audit.repository.RoleRepository;
 import br.com.infnet.registroguilda.audit.repository.UsuarioRepository;
+import br.com.infnet.registroguilda.audit.repository.UsuarioRoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -27,6 +29,9 @@ class AuditMappingTest {
 
     @Autowired
     private OrganizacaoRepository organizacaoRepository;
+
+    @Autowired
+    private UsuarioRoleRepository usuarioRoleRepository;
 
     @Test
     void deveCarregarUsuarioComOrganizacaoERoles() {
@@ -63,5 +68,14 @@ class AuditMappingTest {
         assertNotNull(salvo.getId());
         assertEquals("Novo Usuário", salvo.getNome());
         assertEquals(organizacao.getId(), salvo.getOrganizacao().getId());
+    }
+
+    @Test
+    void deveCarregarUserRolesComGrantedAt() {
+        UsuarioRole usuarioRole = usuarioRoleRepository.findAll().stream().findFirst().orElseThrow();
+
+        assertNotNull(usuarioRole.getUsuario());
+        assertNotNull(usuarioRole.getRole());
+        assertNotNull(usuarioRole.getGrantedAt());
     }
 }

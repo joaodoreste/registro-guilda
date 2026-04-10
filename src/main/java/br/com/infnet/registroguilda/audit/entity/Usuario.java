@@ -46,4 +46,7 @@ public class Usuario {
     @ManyToMany
     @JoinTable(name = "user_roles", schema = "audit", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<UsuarioRole> usuarioRoles = new HashSet<>();
 }
