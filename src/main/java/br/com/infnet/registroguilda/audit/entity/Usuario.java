@@ -1,4 +1,4 @@
-package br.com.infnet.registroguilda.entity;
+package br.com.infnet.registroguilda.audit.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -44,11 +44,6 @@ public class Usuario {
     private OffsetDateTime updatedAt;
 
     @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            schema = "audit",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_roles", schema = "audit", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 }

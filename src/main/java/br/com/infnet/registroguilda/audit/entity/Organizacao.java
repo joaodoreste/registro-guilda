@@ -1,4 +1,4 @@
-package br.com.infnet.registroguilda.entity;
+package br.com.infnet.registroguilda.audit.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

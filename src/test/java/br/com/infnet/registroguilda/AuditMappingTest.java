@@ -1,11 +1,11 @@
 package br.com.infnet.registroguilda;
 
-import br.com.infnet.registroguilda.entity.Organizacao;
-import br.com.infnet.registroguilda.entity.Role;
-import br.com.infnet.registroguilda.entity.Usuario;
-import br.com.infnet.registroguilda.repository.OrganizacaoRepository;
-import br.com.infnet.registroguilda.repository.RoleRepository;
-import br.com.infnet.registroguilda.repository.UsuarioRepository;
+import br.com.infnet.registroguilda.audit.entity.Organizacao;
+import br.com.infnet.registroguilda.audit.entity.Role;
+import br.com.infnet.registroguilda.audit.entity.Usuario;
+import br.com.infnet.registroguilda.audit.repository.OrganizacaoRepository;
+import br.com.infnet.registroguilda.audit.repository.RoleRepository;
+import br.com.infnet.registroguilda.audit.repository.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

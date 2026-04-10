@@ -10,10 +10,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @Entity
-@Table(
-        name = "participacoes_missao",
-        schema = "aventura",
-        uniqueConstraints = {
+@Table(name = "participacoes_missao", schema = "aventura", uniqueConstraints = {
                 @UniqueConstraint(name = "uk_missao_aventureiro", columnNames = {"missao_id", "aventureiro_id"})
         }
 )

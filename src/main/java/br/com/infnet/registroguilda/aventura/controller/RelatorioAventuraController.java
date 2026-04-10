@@ -17,17 +17,13 @@ public class RelatorioAventuraController {
     private final RelatorioAventuraService relatorioAventuraService;
 
     @GetMapping("/ranking-participacao")
-    public List<RankingParticipacaoDto> gerarRanking(
-            @RequestParam OffsetDateTime inicio,
-            @RequestParam OffsetDateTime fim
+    public List<RankingParticipacaoDto> gerarRanking(@RequestParam OffsetDateTime inicio, @RequestParam OffsetDateTime fim
     ) {
         return relatorioAventuraService.gerarRanking(inicio, fim);
     }
 
     @GetMapping("/missoes")
-    public List<RelatorioMissaoDto> gerarRelatorioMissoes(
-            @RequestParam OffsetDateTime inicio,
-            @RequestParam OffsetDateTime fim
+    public List<RelatorioMissaoDto> gerarRelatorioMissoes(@RequestParam OffsetDateTime inicio, @RequestParam OffsetDateTime fim
     ) {
         return relatorioAventuraService.gerarRelatorioMissoes(inicio, fim);
     }

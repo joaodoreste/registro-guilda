@@ -1,4 +1,4 @@
-package br.com.infnet.registroguilda.entity;
+package br.com.infnet.registroguilda.audit.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class Permission {
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", nullable = false)
     private String descricao;
 
     @ManyToMany(mappedBy = "permissions")

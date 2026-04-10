@@ -18,12 +18,7 @@ public class MissaoConsultaController {
     private final MissaoConsultaService missaoConsultaService;
 
     @GetMapping
-    public Page<MissaoResumoDto> listar(
-            @RequestParam(required = false) String status,
-            @RequestParam(required = false) String nivelPerigo,
-            @RequestParam(required = false) OffsetDateTime inicio,
-            @RequestParam(required = false) OffsetDateTime fim,
-            Pageable pageable
+    public Page<MissaoResumoDto> listar(@RequestParam(required = false) String status, @RequestParam(required = false) String nivelPerigo, @RequestParam(required = false) OffsetDateTime inicio, @RequestParam(required = false) OffsetDateTime fim, Pageable pageable
     ) {
         return missaoConsultaService.listar(status, nivelPerigo, inicio, fim, pageable);
     }

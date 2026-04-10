@@ -1,7 +1,7 @@
 package br.com.infnet.registroguilda;
 
-import br.com.infnet.registroguilda.entity.Organizacao;
-import br.com.infnet.registroguilda.repository.OrganizacaoRepository;
+import br.com.infnet.registroguilda.audit.entity.Organizacao;
+import br.com.infnet.registroguilda.audit.repository.OrganizacaoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

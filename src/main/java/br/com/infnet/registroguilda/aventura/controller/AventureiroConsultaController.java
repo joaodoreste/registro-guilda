@@ -16,19 +16,13 @@ public class AventureiroConsultaController {
     private final AventureiroConsultaService aventureiroConsultaService;
 
     @GetMapping
-    public Page<AventureiroResumoDto> listar(
-            @RequestParam(required = false) Boolean ativo,
-            @RequestParam(required = false) String classe,
-            @RequestParam(required = false) Integer nivelMinimo,
-            Pageable pageable
+    public Page<AventureiroResumoDto> listar(@RequestParam(required = false) Boolean ativo, @RequestParam(required = false) String classe, @RequestParam(required = false) Integer nivelMinimo, Pageable pageable
     ) {
         return aventureiroConsultaService.listar(ativo, classe, nivelMinimo, pageable);
     }
 
     @GetMapping("/buscar")
-    public Page<AventureiroResumoDto> buscarPorNome(
-            @RequestParam String nome,
-            Pageable pageable
+    public Page<AventureiroResumoDto> buscarPorNome(@RequestParam String nome, Pageable pageable
     ) {
         return aventureiroConsultaService.buscarPorNome(nome, pageable);
     }

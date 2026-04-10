@@ -1,7 +1,7 @@
 package br.com.infnet.registroguilda.aventura.entity;
 
-import br.com.infnet.registroguilda.entity.Organizacao;
-import br.com.infnet.registroguilda.entity.Usuario;
+import br.com.infnet.registroguilda.audit.entity.Organizacao;
+import br.com.infnet.registroguilda.audit.entity.Usuario;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
