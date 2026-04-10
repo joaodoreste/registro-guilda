@@ -1,39 +1,84 @@
-# Registro da Guilda de Aventureiros - TP2
+# Registro Oficial da Guilda de Aventureiros
 
-Projeto desenvolvido com Spring Boot contendo:
+Projeto final desenvolvido com Spring Boot reunindo os conteúdos construídos ao longo dos trabalhos da disciplina.
+
+A aplicação consolida:
+
+- camada web REST
+- persistência relacional com JPA
+- integração com banco legado
+- domínio de aventura
+- consultas operacionais e relatórios
+- integração com Elasticsearch
+- melhorias arquiteturais com cache
+
+---
 
 ## Funcionalidades
 
-- Integração com banco legado (schema audit)
-- Mapeamento JPA com relacionamentos complexos
-- Domínio de Aventureiros e Missões (schema aventura)
-- Consultas operacionais com filtros
-- Relatórios agregados (ranking e métricas)
-- Testes automatizados
+### Núcleo legado (`audit`)
+- Mapeamento das tabelas do schema `audit`
+- Organizações
+- Usuários
+- Roles
+- Permissions
+- Relacionamento entre usuários e papéis
+- Testes de mapeamento do banco legado
 
-## Tecnologias
+### Domínio de aventura (`aventura`)
+- Aventureiros
+- Companheiros
+- Missões
+- Participações em missão
+- Consultas com filtros
+- Busca por nome
+- Detalhamento completo de aventureiro
+- Detalhamento completo de missão
+- Ranking de participação
+- Relatório de missões com métricas
 
-- Java 17
+### Operações táticas (`operacoes`)
+- Leitura da view `vw_painel_tatico_missao`
+- Endpoint com top 10 missões dos últimos 15 dias
+- Ordenação por índice de prontidão
+- Uso de cache para otimização
+
+### Busca e agregações (`Elasticsearch`)
+- Busca por nome
+- Busca por descrição
+- Busca por frase
+- Busca fuzzy
+- Busca multicampos
+- Busca com filtros
+- Busca por faixa de preço
+- Busca avançada
+- Agregações por categoria
+- Agregações por raridade
+- Preço médio
+- Faixas de preço
+
+---
+
+## Tecnologias utilizadas
+
+- Java 21
 - Spring Boot
 - Spring Data JPA
 - Hibernate
 - PostgreSQL
+- Elasticsearch
 - Maven
-
-## Como executar
-
-1. Subir banco via Docker:
-docker pull leogloriainfnet/postgres-tp2-spring:1.0
-
-2. Rodar aplicação Spring Boot
-
-3. Executar testes
-
-## Estrutura
-
-- audit → domínio legado
-- aventura → novo domínio de negócio
+- Lombok
+- JUnit 5
 
 ---
 
-Projeto desenvolvido como parte do TP2 da disciplina de Desenvolvimento de Serviços com Spring Boot.
+## Endpoint Principais
+- http://localhost:8080/aventura/aventureiros
+- http://localhost:8080/aventura/aventureiros/1
+- http://localhost:8080/aventura/missoes
+- http://localhost:8080/aventura/missoes/1
+- http://localhost:8080/aventura/relatorios/ranking-participacao?inicio=2026-04-01T00:00:00Z&fim=2026-04-30T23:59:59Z
+- http://localhost:8080/aventura/relatorios/missoes?inicio=2026-04-01T00:00:00Z&fim=2026-04-30T23:59:59Z
+- http://localhost:8080/missoes/top15dias
+- http://localhost:8080/produtos/agregacoes/preco-medio
