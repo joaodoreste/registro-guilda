@@ -78,37 +78,6 @@ Antes de executar, instale:
 
 - Java 21+
 - Maven
-- Docker + Docker Compose
-
----
-
-## 🐳 Execução com Docker
-
-### ▶️ Subir ambiente
-
-```bash
-docker compose up --build
-```
-
-Isso irá subir:
-- PostgreSQL
-- Elasticsearch
-- Aplicação Spring Boot
-
----
-
-## ▶️ Executando manualmente
-
-```bash
-mvn clean package
-mvn spring-boot:run
-```
-
----
-
-## 🌐 Acesso
-
-http://localhost:8080
 
 ---
 
